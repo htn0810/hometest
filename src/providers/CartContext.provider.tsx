@@ -109,7 +109,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
   }, [state.products]);
 
   const totalPrice = useMemo(() => {
-    return subTotalPrice + state.products.length > 0 ? SHIPPING_FEE : 0;
+    return subTotalPrice + (state.products.length > 0 ? SHIPPING_FEE : 0);
   }, [subTotalPrice]);
 
   return (
