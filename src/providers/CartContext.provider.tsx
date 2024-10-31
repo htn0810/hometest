@@ -1,15 +1,15 @@
-import { useEffect, useMemo, useReducer } from "react";
-import { IProductInCart } from "../types/Product.type";
-import { CartState } from "../types/Cart.type";
-import { CartContext } from "../contexts/CartContext";
-import { SHIPPING_FEE } from "../constants/common.constant";
-import useLocalStorage from "../customhooks/useLocalStorage";
+import { useEffect, useMemo, useReducer } from 'react';
+import { IProductInCart } from '../types/Product.type';
+import { CartState } from '../types/Cart.type';
+import { CartContext } from '../contexts/CartContext';
+import { SHIPPING_FEE } from '../constants/common.constant';
+import useLocalStorage from '../customhooks/useLocalStorage';
 
 type CartAction =
-  | { type: "ADD_TO_CART"; product: IProductInCart }
-  | { type: "REMOVE_FROM_CART"; productId: number }
-  | { type: "UPDATE_CART"; productId: number; quantity: number }
-  | { type: "CLEAR_CART" };
+  | { type: 'ADD_TO_CART'; product: IProductInCart }
+  | { type: 'REMOVE_FROM_CART'; productId: number }
+  | { type: 'UPDATE_CART'; productId: number; quantity: number }
+  | { type: 'CLEAR_CART' };
 
 const initialCartState: CartState = {
   products: [],
@@ -18,10 +18,8 @@ const initialCartState: CartState = {
 // Reducer function to manage cart state
 const cartReducer = (state: CartState, action: CartAction): CartState => {
   switch (action.type) {
-    case "ADD_TO_CART": {
-      const existingProduct = state.products.find(
-        (product) => product.id === action.product.id
-      );
+    case 'ADD_TO_CART': {
+      const existingProduct = state.products.find((product) => product.id === action.product.id);
       if (existingProduct) {
         // Update quantity if product already in cart
         return {
@@ -32,7 +30,7 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
                   ...product,
                   quantity: product.quantity + action.product.quantity,
                 }
-              : product
+              : product,
           ),
         };
       } else {
@@ -43,25 +41,21 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
         };
       }
     }
-    case "UPDATE_CART": {
+    case 'UPDATE_CART': {
       return {
         ...state,
         products: state.products.map((product) =>
-          product.id === action.productId
-            ? { ...product, quantity: action.quantity }
-            : product
+          product.id === action.productId ? { ...product, quantity: action.quantity } : product,
         ),
       };
     }
-    case "REMOVE_FROM_CART": {
+    case 'REMOVE_FROM_CART': {
       return {
         ...state,
-        products: state.products.filter(
-          (product) => product.id !== action.productId
-        ),
+        products: state.products.filter((product) => product.id !== action.productId),
       };
     }
-    case "CLEAR_CART": {
+    case 'CLEAR_CART': {
       return initialCartState;
     }
     default:
@@ -70,42 +64,32 @@ const cartReducer = (state: CartState, action: CartAction): CartState => {
 };
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
-  const [storedCart, setStoredCart] = useLocalStorage<CartState>(
-    "cart",
-    initialCartState
-  );
-  const [state, dispatch] = useReducer(
-    cartReducer,
-    storedCart || initialCartState
-  );
+  const [storedCart, setStoredCart] = useLocalStorage<CartState>('cart', initialCartState);
+  const [state, dispatch] = useReducer(cartReducer, storedCart || initialCartState);
 
   useEffect(() => {
     setStoredCart(state);
   }, [state, setStoredCart]);
 
   const addToCart = (product: IProductInCart) => {
-    dispatch({ type: "ADD_TO_CART", product });
+    dispatch({ type: 'ADD_TO_CART', product });
   };
 
   const updateCart = (productId: number, quantity: number) => {
-    dispatch({ type: "UPDATE_CART", productId, quantity });
+    dispatch({ type: 'UPDATE_CART', productId, quantity });
   };
 
   const removeFromCart = (productId: number) => {
-    dispatch({ type: "REMOVE_FROM_CART", productId });
+    dispatch({ type: 'REMOVE_FROM_CART', productId });
   };
 
   const clearCart = () => {
-    dispatch({ type: "CLEAR_CART" });
+    dispatch({ type: 'CLEAR_CART' });
   };
 
   const subTotalPrice = useMemo(() => {
     if (state.products.length === 0) return 0;
-    return parseFloat(
-      state.products
-        .reduce((prev, current) => prev + current.quantity * current.price, 0)
-        .toFixed(2)
-    );
+    return parseFloat(state.products.reduce((prev, current) => prev + current.quantity * current.price, 0).toFixed(2));
   }, [state.products]);
 
   const totalPrice = useMemo(() => {

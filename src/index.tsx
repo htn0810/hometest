@@ -8,21 +8,19 @@ import { CartProvider } from './providers/CartContext.provider';
 import LoadingProvider from './providers/LoadingContext.provider';
 import { ToastProvider } from './providers/ToastContext.provider';
 
-const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
-);
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <React.StrictMode>
     <BrowserRouter>
       <LoadingProvider>
         <ToastProvider>
-          <CartProvider>  
+          <CartProvider>
             <App />
           </CartProvider>
         </ToastProvider>
       </LoadingProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 // If you want to start measuring performance in your app, pass a function

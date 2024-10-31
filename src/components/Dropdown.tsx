@@ -1,4 +1,4 @@
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from 'react';
 
 type Props = {
   title: string;
@@ -30,9 +30,9 @@ const Dropdown = (props: Props) => {
   };
 
   useEffect(() => {
-    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
     return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
 
@@ -42,10 +42,10 @@ const Dropdown = (props: Props) => {
   };
 
   return (
-    <div className="relative inline-block text-left">
+    <div className='relative inline-block text-left'>
       <button
-        type="button"
-        className="flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+        type='button'
+        className='flex w-full justify-center items-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50'
         onClick={() => setShow((prev) => !prev)}
         ref={buttonRef}
       >
@@ -54,7 +54,7 @@ const Dropdown = (props: Props) => {
       </button>
       {show && (
         <div
-          className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden"
+          className='absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none overflow-hidden'
           ref={popupRef}
         >
           {React.Children.map(children, (child) =>
@@ -62,7 +62,7 @@ const Dropdown = (props: Props) => {
               ? React.cloneElement(child, {
                   onClick: () => handleItemClick(child.props.onClick),
                 })
-              : null
+              : null,
           )}
         </div>
       )}

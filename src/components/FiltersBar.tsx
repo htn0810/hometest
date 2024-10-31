@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
-import { CategoryAPI } from "../apis/categories.api";
-import { INITIAL_FILTERS } from "../constants/common.constant";
-import { useToast } from "../contexts/ToastContext";
-import { ICategory } from "../types/Category.type";
-import { ISort, ProductsRequestParams } from "../types/Product.type";
-import { parseSearchParams } from "../utils/parseSearchParams";
-import Checkbox from "./Checkbox";
-import StarRating from "./StarRating";
+import React, { useEffect, useState } from 'react';
+import { CategoryAPI } from '../apis/categories.api';
+import { INITIAL_FILTERS } from '../constants/common.constant';
+import { useToast } from '../contexts/ToastContext';
+import { ICategory } from '../types/Category.type';
+import { ProductsRequestParams } from '../types/Product.type';
+import { parseSearchParams } from '../utils/parseSearchParams';
+import Checkbox from './Checkbox';
+import StarRating from './StarRating';
 
 type Props = {
   onFilter: React.Dispatch<React.SetStateAction<ProductsRequestParams>>;
@@ -17,12 +17,8 @@ const FiltersBar = (props: Props) => {
   const { onFilter, onClose } = props;
   const { showToast } = useToast();
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const [selectedCategoryId, setSelectedCategoryId] = useState<
-    number | undefined
-  >(undefined);
-  const [selectedRating, setSelectedRating] = useState<number | undefined>(
-    undefined
-  );
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | undefined>(undefined);
+  const [selectedRating, setSelectedRating] = useState<number | undefined>(undefined);
   const [minPrice, setMinPrice] = useState<number | undefined>(undefined);
   const [maxPrice, setMaxPrice] = useState<number | undefined>(undefined);
 
@@ -48,23 +44,17 @@ const FiltersBar = (props: Props) => {
     setCategories(categoriesList);
   };
 
-  const handleCheckboxChange = (
-    key: keyof Pick<ProductsRequestParams, "categoryId" | "rating">,
-    value: number
-  ) => {
-    if (key === "categoryId") {
+  const handleCheckboxChange = (key: keyof Pick<ProductsRequestParams, 'categoryId' | 'rating'>, value: number) => {
+    if (key === 'categoryId') {
       setSelectedCategoryId((prev) => (prev === value ? undefined : value));
     } else {
       setSelectedRating((prev) => (prev === value ? undefined : value));
     }
   };
 
-  const handleChangePrice = (
-    type: "min" | "max",
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
+  const handleChangePrice = (type: 'min' | 'max', event: React.ChangeEvent<HTMLInputElement>) => {
     const value = Math.max(Number.parseFloat(event.target.value), 0);
-    if (type === "min") {
+    if (type === 'min') {
       setMinPrice(Number.isNaN(value) ? -Infinity : value);
     } else {
       setMaxPrice(Number.isNaN(value) ? Infinity : value);
@@ -73,7 +63,7 @@ const FiltersBar = (props: Props) => {
 
   const handleApplyFilters = () => {
     if (minPrice && maxPrice && minPrice >= maxPrice) {
-      showToast("error", "Min price must be smaller than max price!");
+      showToast('error', 'Min price must be smaller than max price!');
       return;
     }
     onFilter((prev) => ({
@@ -114,39 +104,39 @@ const FiltersBar = (props: Props) => {
   };
 
   return (
-    <div className="fixed overflow-scroll md:overflow-auto md:relative inset-0 w-full md:w-[200px] bg-white flex-shrink-0 rounded-sm p-6 md:p-2 z-10">
-      <h5 className="font-medium text-base">Category</h5>
+    <div className='fixed overflow-scroll md:overflow-auto md:relative inset-0 w-full md:w-[200px] bg-white flex-shrink-0 rounded-sm p-6 md:p-2 z-10'>
+      <h5 className='font-medium text-base'>Category</h5>
       {categories &&
         categories.map((category) => (
-          <div className="w-full p-2 text-sm" key={category.id}>
+          <div className='w-full p-2 text-sm' key={category.id}>
             <Checkbox
               isChecked={selectedCategoryId === category.id}
               id={category.id.toString()}
-              onChange={() => handleCheckboxChange("categoryId", category.id)}
+              onChange={() => handleCheckboxChange('categoryId', category.id)}
             >
               {category.name.toUpperCase()}
             </Checkbox>
           </div>
         ))}
-      <h5 className="font-medium text-base">Price</h5>
-      <div className="grid grid-cols-2 gap-x-2 w-full mt-2">
+      <h5 className='font-medium text-base'>Price</h5>
+      <div className='grid grid-cols-2 gap-x-2 w-full mt-2'>
         <input
-          type="number"
-          placeholder="Min"
-          value={minPrice ?? ""}
-          className="p-2 outline-none border border-gray-300 text-xs appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-          onChange={(e) => handleChangePrice("min", e)}
+          type='number'
+          placeholder='Min'
+          value={minPrice ?? ''}
+          className='p-2 outline-none border border-gray-300 text-xs appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+          onChange={(e) => handleChangePrice('min', e)}
         />
         <input
-          type="number"
-          placeholder="Max"
-          value={maxPrice ?? ""}
-          className="p-2 outline-none border border-gray-300 text-xs appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
-          onChange={(e) => handleChangePrice("max", e)}
+          type='number'
+          placeholder='Max'
+          value={maxPrice ?? ''}
+          className='p-2 outline-none border border-gray-300 text-xs appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
+          onChange={(e) => handleChangePrice('max', e)}
         />
       </div>
-      <h5 className="font-medium text-base mt-2">Rating</h5>
-      <div className="flex flex-col">
+      <h5 className='font-medium text-base mt-2'>Rating</h5>
+      <div className='flex flex-col'>
         {Array.from({ length: 5 }, (_, index) => (
           <StarRating
             key={5 - index}
@@ -156,17 +146,14 @@ const FiltersBar = (props: Props) => {
           />
         ))}
       </div>
-      <div className="flex justify-end gap-x-4 mt-4">
+      <div className='flex justify-end gap-x-4 mt-4'>
         <button
-          className="text-sm px-3 py-1 border-[1px] border-black hover:bg-gray-200 rounded-md"
+          className='text-sm px-3 py-1 border-[1px] border-black hover:bg-gray-200 rounded-md'
           onClick={handleClearFilters}
         >
           Clear
         </button>
-        <button
-          className="bg-gray-900 hover:bg-gray-700 px-3 py-1 text-white rounded-md"
-          onClick={handleApplyFilters}
-        >
+        <button className='bg-gray-900 hover:bg-gray-700 px-3 py-1 text-white rounded-md' onClick={handleApplyFilters}>
           Apply
         </button>
       </div>

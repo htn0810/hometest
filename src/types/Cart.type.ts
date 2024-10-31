@@ -1,4 +1,4 @@
-import { IProductInCart } from "./Product.type";
+import { IProductInCart } from './Product.type';
 
 export interface CartState {
   products: IProductInCart[];

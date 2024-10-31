@@ -1,9 +1,9 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext } from 'react';
 
 interface LoadingContextProps {
-  isLoading: boolean,
-  showLoading: () => void,
-  hideLoading: () => void
+  isLoading: boolean;
+  showLoading: () => void;
+  hideLoading: () => void;
 }
 
 export const LoadingContext = createContext<LoadingContextProps | undefined>(undefined);

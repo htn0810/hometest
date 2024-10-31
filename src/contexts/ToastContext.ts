@@ -1,5 +1,5 @@
-import { createContext, useContext } from "react";
-import { ToastType } from "../types/common.type";
+import { createContext, useContext } from 'react';
+import { ToastType } from '../types/common.type';
 
 interface ToastContextProps {
   showToast: (type: ToastType, message: string) => void;
@@ -11,7 +11,7 @@ export const ToastContext = createContext<ToastContextProps | undefined>(undefin
 export const useToast = (): ToastContextProps => {
   const context = useContext(ToastContext);
   if (!context) {
-    throw new Error("useToast must be used within a ToastProvider");
+    throw new Error('useToast must be used within a ToastProvider');
   }
   return context;
 };
