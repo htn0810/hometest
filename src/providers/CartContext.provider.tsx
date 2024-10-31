@@ -5,14 +5,12 @@ import { CartContext } from "../contexts/CartContext";
 import { SHIPPING_FEE } from "../constants/common.constant";
 import useLocalStorage from "../customhooks/useLocalStorage";
 
-// Define the types of actions we’ll use
 type CartAction =
   | { type: "ADD_TO_CART"; product: IProductInCart }
   | { type: "REMOVE_FROM_CART"; productId: number }
   | { type: "UPDATE_CART"; productId: number; quantity: number }
   | { type: "CLEAR_CART" };
 
-// Initial state for the cart
 const initialCartState: CartState = {
   products: [],
 };
@@ -85,7 +83,6 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     setStoredCart(state);
   }, [state, setStoredCart]);
 
-  // Define actions
   const addToCart = (product: IProductInCart) => {
     dispatch({ type: "ADD_TO_CART", product });
   };
