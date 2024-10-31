@@ -11,8 +11,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Explanation
 
 - Prepare dummy data.
-- Setup a JSON server with dummy data and deploy on Render: `https://jsonserverec.onrender.com`
-- Setup FE project with Create React App, TailwindCss, TypeScript, React Router Dom, React Context API.
+- Setup a JSON server with dummy data and deploy on Render: [BE server](https://jsonserverec.onrender.com)
+- Setup FE project with **Create React App**, **TailwindCss**, **TypeScript**, **React Router Dom**, **React Context API**.
 - Build all components without any UI Library.
 - Use Context API to store global state and store cart's products on LocalStorage.
 - Splitting Cart page and Products page.
@@ -26,4 +26,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Production Deployment
 
-`htn-hometest.vercel.app`
+[Production Deployment](htn-hometest.vercel.app)
