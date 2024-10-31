@@ -41,7 +41,7 @@ const Header = () => {
   }, []);
 
   return (
-    <div className='sticky top-0 left-0 right-0 z-20 flex gap-x-2 items-center justify-between bg-slate-900 px-4 -mx-4 sm:px-6 sm:-mx-6 md:px-10 md:-mx-10 lg:-mx-20 lg:px-20 py-3 shadow-md'>
+    <div className='flex gap-x-2 items-center justify-between bg-slate-900 px-4 -mx-4 sm:px-6 sm:-mx-6 md:px-10 md:-mx-10 lg:-mx-20 lg:px-20 py-3 shadow-md'>
       <h3 className='font-semibold cursor-pointer text-white text-lg md:text-xl hidden xs:block'>HOME TEST</h3>
       <div className='flex-grow xs:flex-grow-0 xs:min-w-[200px] md:min-w-[360px] relative' ref={popupRef}>
         <input

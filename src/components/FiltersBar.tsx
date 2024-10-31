@@ -104,7 +104,7 @@ const FiltersBar = (props: Props) => {
   };
 
   return (
-    <div className='fixed overflow-scroll md:overflow-auto md:relative inset-0 w-full md:w-[200px] bg-white flex-shrink-0 rounded-sm p-6 md:p-2 z-10'>
+    <div className='fixed overflow-scroll md:overflow-auto md:relative inset-0 w-full md:w-[200px] bg-white flex-shrink-0 rounded-sm p-6 md:p-2 z-40'>
       <h5 className='font-medium text-base'>Category</h5>
       {categories &&
         categories.map((category) => (
