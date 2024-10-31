@@ -2,7 +2,6 @@ import { createContext, useContext } from 'react';
 import { IProductInCart } from '../types/Product.type';
 import { CartState } from '../types/Cart.type';
 
-// Define the context interface
 interface CartContextProps {
   state: CartState;
   addToCart: (product: IProductInCart) => void;
@@ -13,10 +12,8 @@ interface CartContextProps {
   subTotalPrice: number;
 }
 
-// Create context
 export const CartContext = createContext<CartContextProps | undefined>(undefined);
 
-// Custom hook to use the CartContext
 export const useCart = (): CartContextProps => {
   const context = useContext(CartContext);
   if (!context) {

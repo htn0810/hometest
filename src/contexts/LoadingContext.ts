@@ -8,7 +8,6 @@ interface LoadingContextProps {
 
 export const LoadingContext = createContext<LoadingContextProps | undefined>(undefined);
 
-// Custom hook to use the LoadingContext
 export const useLoading = (): LoadingContextProps => {
   const context = useContext(LoadingContext);
   if (!context) {
