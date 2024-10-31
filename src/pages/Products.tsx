@@ -124,7 +124,16 @@ const Products = () => {
   };
 
   const handleSort = (sort: ISort) => {
-    setFilters((prev) => ({ ...prev, sort: sort }));
+    setFilters((prev) => {
+      if (
+        prev.sort &&
+        prev.sort.key === sort.key &&
+        prev.sort.type === sort.type
+      ) {
+        return { ...prev, sort: undefined };
+      }
+      return { ...prev, sort: sort };
+    });
   };
 
   const handleCheckboxChange = (
@@ -203,7 +212,7 @@ const Products = () => {
           <span>{showFilters ? "Hide" : "Show"} Filters</span>
           <FilterIcon className="size-6" />
         </div>
-        <Dropdown title="Sort By:" icon={<ArrowDownIcon className="size-6" />}>
+        <Dropdown title="Sort By" icon={<ArrowDownIcon className="size-6" />}>
           <DropdownItem
             onClick={() => handleSort({ key: "price", type: "desc" })}
             isActive={
