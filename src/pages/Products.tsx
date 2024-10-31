@@ -37,7 +37,6 @@ const Products = () => {
 
   const parseSearchParams = (): ProductsRequestParams => {
     const params = new URLSearchParams(window.location.search);
-    console.log(params);
     const existedFilters: ProductsRequestParams = {
       page: Number(params.get("page")) || 1,
       sort: params.get("sort")
@@ -235,7 +234,7 @@ const Products = () => {
               filters.sort?.key === "title" && filters.sort.type === "asc"
             }
           >
-            Name: Asc-Desc
+            Name: A-Z
           </DropdownItem>
           <DropdownItem
             onClick={() => handleSort({ key: "title", type: "desc" })}
@@ -243,7 +242,7 @@ const Products = () => {
               filters.sort?.key === "title" && filters.sort.type === "desc"
             }
           >
-            Name: Desc-Asc
+            Name: Z-A
           </DropdownItem>
           <DropdownItem
             onClick={() => handleSort({ key: "rating", type: "desc" })}
@@ -287,14 +286,14 @@ const Products = () => {
               <input
                 type="number"
                 placeholder="Min"
-                value={minPrice || undefined}
+                value={minPrice ?? ""}
                 className="p-2 outline-none border border-gray-300 text-xs appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 onChange={(e) => handleChangePrice("min", e)}
               />
               <input
                 type="number"
                 placeholder="Max"
-                value={maxPrice || undefined}
+                value={maxPrice ?? ""}
                 className="p-2 outline-none border border-gray-300 text-xs appearance-none [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                 onChange={(e) => handleChangePrice("max", e)}
               />
